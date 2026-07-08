@@ -26,9 +26,9 @@ The list of Admins on the profile is the authoritative public record of who curr
 
 ## 2. Appointing Admins
 
-- The organization has three admins.
-- The lower bound avoids a single point of failure (e.g. losing access if one person is unavailable).
-- The upper bound keeps accountability clear and, more importantly, limits the **attack surface**: an Admin can change repository settings, branch protection, and access rights, and can therefore compromise *any* software release in the organization. Every additional Admin is another account that, if taken over, puts every release at risk. Keeping the number of Admins small (and 2FA-protected, see Section 3) is a deliberate security measure.
+- The organization has **three** Admins.
+- Having three rather than one avoids a single point of failure (e.g. losing access if one person is unavailable) and lets decisions be taken by a clear majority (two of three).
+- Not having more keeps accountability clear and, more importantly, limits the **attack surface**: an Admin can change repository settings, branch protection, and access rights, and can therefore compromise *any* software release in the organization. Every additional Admin is another account that, if taken over, puts every release at risk. Keeping the number of Admins small (and 2FA-protected, see Section 3) is a deliberate security measure.
 - Admins are **elected by all members of the organization** for a term of
   **two years**. An election is held every two years; Admins may stand again
   and be re-elected.
@@ -51,9 +51,8 @@ Every Admin:
   Organization-wide 2FA enforcement should be enabled in the organization
   settings.
 - Uses their **real name** on their GitHub account.
-- Is responsible for the tasks reserved to Admins in this document: creating
-  repositories, appointing and removing Maintainers, and keeping the
-  organization profile and these rules up to date.
+- Is responsible for the tasks reserved to Admins in this document (see
+  *Scope and limits of Admin authority* below).
 - Acts as a point of contact for organizational (non-technical) questions and
   for Code of Conduct concerns.
 
@@ -66,6 +65,12 @@ may only:
 - appoint and remove Maintainers,
 - archive repositories, and
 - keep the organization profile and these governance rules up to date.
+
+**Appointing or removing a Maintainer and archiving a repository each require a
+majority of the Admins** (a majority means at least two of the three Admins).
+Archiving effectively ends a project and is too consequential for one Admin to
+decide alone. Creating a repository and routine profile updates may be done by a
+single Admin.
 
 Admins have **no authority over the contents of a repository**. What goes into
 a repository — its code, documentation, branching details, releases, and which
