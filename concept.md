@@ -2,7 +2,6 @@
 
 * Kosten?
 * Module aktivieren - was war damit gemeint?
-* Scope was Admins für Regeln aufstellen dürfen
 * Nicht unbedingt MII (unter welchem Namen soll die Org laufen?)
 * NUM Koordinierungsstelle?
 * Wo liegen noch andere Repos? (DSF, Blaze, https://gitlab.com/mii-termserv, ...?)
@@ -57,6 +56,23 @@ Every Admin:
   organization profile and these rules up to date.
 - Acts as a point of contact for organizational (non-technical) questions and
   for Code of Conduct concerns.
+
+### Scope and limits of Admin authority
+
+Admin authority is limited to **organizational** matters. Concretely, an Admin
+may only:
+
+- create repositories,
+- appoint and remove Maintainers,
+- archive repositories, and
+- keep the organization profile and these governance rules up to date.
+
+Admins have **no authority over the contents of a repository**. What goes into
+a repository — its code, documentation, branching details, releases, and which
+issues or pull requests are accepted — is the sole responsibility of that
+repository's Maintainers. Admins do not set rules for individual repositories;
+the only rules they establish are the organization-wide governance in this
+document (changed as described in Section 8).
 
 Admin rights should be used sparingly. Day-to-day work on a repository is the
 responsibility of its Maintainers, not the Admins.
@@ -129,7 +145,10 @@ Every repository has a `README` that explains:
 
 ## 7. Maintainers
 
-- Maintainers are **appointed and removed by the Admins**.
+- Maintainers are **appointed and removed by a majority of the Admins**. No
+  single Admin can appoint or remove a Maintainer on their own. This applies to
+  every Maintainer appointment, including replacing an unresponsive Maintainer
+  and appointing an Admin as Maintainer (see below).
 - By accepting the role, a Maintainer commits to being **reachable** for
   questions, issues, and pull requests concerning their repository.
 - **Response time:** a Maintainer responds to issues and pull requests within
@@ -139,7 +158,12 @@ Every repository has a `README` that explains:
   the load and to keep response times realistic.
 - If a Maintainer is no longer reachable or repeatedly misses the response time,
   the Admins may appoint a replacement or archive the repository.
-- The same person can be Maintainer of a repository and Admin of the organization at the same time.
+- The same person can be Maintainer of a repository and Admin of the
+  organization at the same time. The two are distinct **roles, not persons**:
+  authority over a repository's contents comes only from the Maintainer role,
+  and being an Admin confers no additional say over those contents. Because
+  every Maintainer appointment requires a majority of the Admins, an Admin
+  cannot grant themselves this content authority unilaterally.
 
 ---
 
