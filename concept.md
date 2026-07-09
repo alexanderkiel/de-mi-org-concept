@@ -8,7 +8,12 @@
 
 # Organization Governance
 
-**Scope:** This document defines the basic rules and governance for a GitHub organisation that hosts the software and documentation originated in the Medical Informatics Initiative with the goal to widen the scope towards German Medical Informatics software independent of any concrete funding or initiative. It is intentionally lightweight. Its goal is to keep the organization maintainable, transparent, and trustworthy without imposing heavy process.
+**Scope:** This document defines the basic rules and governance for a GitHub
+organisation that hosts the software and documentation originated in the Medical
+Informatics Initiative with the goal to widen the scope towards German Medical
+Informatics software independent of any concrete funding or initiative. It is
+intentionally lightweight. Its goal is to keep the organization maintainable,
+transparent, and trustworthy without imposing heavy process.
 
 ---
 
@@ -20,15 +25,23 @@ The organization profile (the `.github` repository `README`) must, at minimum:
 - Link to this governance document and to the Code of Conduct.
 - Describe in one or two sentences what the organization is for.
 
-The list of Admins on the profile is the authoritative public record of who currently holds administrative responsibility.
+The list of Admins on the profile is the authoritative public record of who
+currently holds administrative responsibility.
 
 ---
 
 ## 2. Appointing Admins
 
 - The organization has **three** Admins.
-- Having three rather than one avoids a single point of failure (e.g. losing access if one person is unavailable) and lets decisions be taken by a clear majority (two of three).
-- Not having more keeps accountability clear and, more importantly, limits the **attack surface**: an Admin can change repository settings, branch protection, and access rights, and can therefore compromise *any* software release in the organization. Every additional Admin is another account that, if taken over, puts every release at risk. Keeping the number of Admins small (and 2FA-protected, see Section 3) is a deliberate security measure.
+- Having three rather than one avoids a single point of failure (e.g. losing
+  access if one person is unavailable) and lets decisions be taken by a clear
+  majority (two of three).
+- Not having more keeps accountability clear and, more importantly, limits the
+  **attack surface**: an Admin can change repository settings, branch
+  protection, and access rights, and can therefore compromise *any* software
+  release in the organization. Every additional Admin is another account that,
+  if taken over, puts every release at risk. Keeping the number of Admins small
+  (and 2FA-protected, see Section 3) is a deliberate security measure.
 - Admins are **elected by all members of the organization** for a term of
   **two years**. A single election fills all three Admin seats at once; Admins
   may stand again and be re-elected. The full election procedure — who may vote
@@ -78,6 +91,18 @@ candidates in order of preference: `1` for their most preferred candidate, `2`
 for the next, and so on. A voter may rank as many or as few candidates as they
 wish; unranked candidates simply receive no preference from that voter.
 
+**Every ballot includes a "Re-Open Nominations" option.** Alongside the
+candidates, each ballot carries a standing option, **Re-Open Nominations
+(RON)**, which voters rank exactly as they would a candidate. RON is treated as
+an ordinary candidate in the count: it can gather preferences, reach the quota,
+and win a seat. Its purpose is to let voters say *"none of these — look
+again"*, so a candidate is never elected merely for standing. Even when only
+three candidates (or fewer) stand for the three seats, they must still be
+preferred over RON to be elected, rather than taking a seat automatically. Any
+seat RON wins is left unfilled and handled under *Unfilled seats* below. Such an
+option is common practice — Debian, for example, requires a "None of the Above"
+choice in all its elections and re-runs the election if it wins.
+
 The count then proceeds in rounds:
 
 1. A **quota** is calculated — the minimum number of votes a candidate needs in
@@ -126,10 +151,16 @@ low enough that it stays realistically reachable at any size. If the quorum is
 **not** met, the election is void, the outgoing Admins remain in office, and a
 new election is called within a reasonable period.
 
-**Too few candidates.** If exactly three eligible candidates stand, they are
-elected unopposed. If **fewer than three** stand, those who stood are elected
-and the remaining seat(s) are filled as interim vacancies by the mechanism for
-between-election appointments described above, until candidates can be found.
+**Unfilled seats.** A seat can end up unfilled in two ways: too few candidates
+stand, or Re-Open Nominations is elected to a seat. In either case, the seats
+that *were* filled are taken by the elected candidates, and for each remaining
+unfilled seat the **outgoing Admins stay in office** and choose one of two
+routes: (a) extend the nomination period and re-run the election for the
+unfilled seats, or (b) appoint suitable members to them by a **majority of the
+outgoing Admins**, to serve until the next regular election. Because the
+outgoing Admins were themselves elected and form a full three-person body with a
+genuine majority, every such appointment stays legitimate, and a single newly
+elected Admin can never install the others.
 
 **Ties.** If two candidates are tied at the point where one of them must be
 elected or eliminated, the tie is resolved by OpaVote's standard tie-breaking
@@ -279,5 +310,6 @@ Every repository has a `README` that explains:
 ## 8. Changing These Rules
 
 These rules can be changed by a **majority of the Admins**. Changes are made via
-a pull request to this document so that the history of decisions is visible. The majority is expressed by at least two positive reviews of the pull request.
+a pull request to this document so that the history of decisions is visible. The
+majority is expressed by at least two positive reviews of the pull request.
 
