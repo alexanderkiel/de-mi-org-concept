@@ -30,15 +30,119 @@ The list of Admins on the profile is the authoritative public record of who curr
 - Having three rather than one avoids a single point of failure (e.g. losing access if one person is unavailable) and lets decisions be taken by a clear majority (two of three).
 - Not having more keeps accountability clear and, more importantly, limits the **attack surface**: an Admin can change repository settings, branch protection, and access rights, and can therefore compromise *any* software release in the organization. Every additional Admin is another account that, if taken over, puts every release at risk. Keeping the number of Admins small (and 2FA-protected, see Section 3) is a deliberate security measure.
 - Admins are **elected by all members of the organization** for a term of
-  **two years**. An election is held every two years; Admins may stand again
-  and be re-elected.
-- An election will replace all three Admins.
+  **two years**. A single election fills all three Admin seats at once; Admins
+  may stand again and be re-elected. The full election procedure — who may vote
+  and stand, how votes are cast and counted, and what happens in edge cases — is
+  described in *Electing the Admins* below.
 - **Between elections**, the current Admins may fill a vacancy or remove an
   Admin who can no longer serve (or who must be removed for cause) by a
   **majority of the current Admins**. Such an interim appointment lasts only
   until the next regular election.
 - Appointments, elections, and removals are recorded by updating the Admin list
   on the organization profile.
+
+### Electing the Admins
+
+The organization is large — several hundred members drawn from many different
+institutions — and it will keep growing. An election method that works for a
+handful of people does not automatically work at this scale: with many voters
+organized into institutional groups, a simple "vote for three, the top three
+win" ballot would let a single large institution or coalition capture **all
+three** Admin seats and leave a large minority with no representation at all.
+The procedure below is designed specifically to avoid that outcome, to keep the
+ballot secret, and to remain legitimate as the organization grows.
+
+**When elections happen.** A regular election is held every **two years**, in
+the same calendar month as the previous regular election, and it fills all
+three Admin seats simultaneously. The outgoing Admins remain in office until the
+newly elected Admins have been recorded on the organization profile and have
+been granted their access, so that the organization is never left without
+Admins during the handover.
+
+**Who may vote (the electorate).** Every member of the organization on a fixed
+**cut-off date** — announced together with the call for the election, and set a
+few weeks before voting opens — is eligible to vote. Using a cut-off date fixes
+the electorate in advance and prevents last-minute additions from being made in
+order to influence the result. Each eligible member has exactly one vote.
+
+**Who may stand (candidates).** Any member may stand for election, including the
+current Admins. Candidates nominate themselves during a **nomination period**
+that opens with the call for the election and closes before voting begins.
+Because every Admin must use their real name and secure their account with 2FA
+(see Section 3), the same requirements apply to anyone standing for the role.
+
+**How votes are cast and counted: the Single Transferable Vote (STV).** The
+election uses the **Single Transferable Vote**, a ranked, proportional method.
+Instead of picking a fixed number of candidates, each voter **ranks** the
+candidates in order of preference: `1` for their most preferred candidate, `2`
+for the next, and so on. A voter may rank as many or as few candidates as they
+wish; unranked candidates simply receive no preference from that voter.
+
+The count then proceeds in rounds:
+
+1. A **quota** is calculated — the minimum number of votes a candidate needs in
+   order to be guaranteed one of the three seats. (Concretely this is the
+   *Droop quota*: the total number of valid votes divided by four — that is,
+   *seats + 1* — and then rounded down and increased by one. The exact formula
+   does not need to be understood by voters; the counting tool applies it.)
+2. Every ballot is first counted for its **first preference**. Any candidate who
+   reaches the quota is **elected**.
+3. If an elected candidate received **more** votes than the quota, those
+   *surplus* votes are not wasted: the surplus is transferred, proportionally,
+   to the **next preference** marked on those ballots.
+4. If no remaining candidate reaches the quota, the candidate with the **fewest**
+   votes is **eliminated**, and each of their ballots is transferred to its next
+   still-available preference.
+5. Steps 3 and 4 repeat until three candidates have reached the quota and are
+   elected.
+
+The effect of transferring both surplus and eliminated votes is that almost
+every ballot ends up helping to elect *someone*, and the three winners
+collectively reflect the range of preferences in the organization. In practical
+terms this means a cohesive minority of roughly a third of the voters can secure
+**one** of the three seats, rather than being shut out entirely — which is
+exactly the property a large, institutionally diverse organization needs.
+
+**The voting tool.** The election is run with **[OpaVote](https://www.opavote.com)**,
+an established online service purpose-built for STV and other ranked elections.
+OpaVote is used because it (a) implements STV correctly, so the count is not
+done by hand, (b) provides a **secret ballot**, so no one can see how an
+individual voted, and (c) publishes a full, reproducible record of the count
+that anyone can audit. Each eligible member receives a single personal voting
+link. Note that OpaVote's guarantee rests on trusting the service and the
+published ballots rather than on cryptographic proof; for an organization of
+named professionals in a reputational field this trust model is considered
+acceptable, and it is the price of getting a proportional method that resists
+bloc capture.
+
+**Quorum.** For the result to be valid, a minimum number of eligible members
+must cast a valid ballot. Rather than a fixed percentage — which becomes
+impossible to reach as the organization grows — the quorum **scales with the
+size of the electorate**: at least the **square root of the number of eligible
+members** (rounded up) must vote. For today's roughly 350 members this is about
+**19** voters; if the organization grows to a thousand members it rises only to
+about **32**. This keeps the bar high enough to give the result legitimacy, yet
+low enough that it stays realistically reachable at any size. If the quorum is
+**not** met, the election is void, the outgoing Admins remain in office, and a
+new election is called within a reasonable period.
+
+**Too few candidates.** If exactly three eligible candidates stand, they are
+elected unopposed. If **fewer than three** stand, those who stood are elected
+and the remaining seat(s) are filled as interim vacancies by the mechanism for
+between-election appointments described above, until candidates can be found.
+
+**Ties.** If two candidates are tied at the point where one of them must be
+elected or eliminated, the tie is resolved by OpaVote's standard tie-breaking
+rule (which looks back at earlier counting rounds); if a tie still cannot be
+broken, it is decided **by lot**.
+
+**Administration and recording.** The election is organized by the outgoing
+Admins, who set up the ballot in OpaVote, announce the call, cut-off date, and
+nomination and voting periods, and publish the result. Because the outgoing
+Admins may themselves be candidates, the actual counting is performed by
+OpaVote rather than by them, and they may delegate the administrative work to a
+member who is **not** standing. Once the result is final, the Admin list on the
+organization profile is updated accordingly (see Section 1).
 
 ---
 
