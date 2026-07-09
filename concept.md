@@ -4,7 +4,10 @@
 * Module aktivieren - was war damit gemeint?
 * Nicht unbedingt MII (unter welchem Namen soll die Org laufen?)
 * NUM Koordinierungsstelle?
-* Wo liegen noch andere Repos? (DSF, Blaze, https://gitlab.com/mii-termserv, ...?)
+* Wo liegen noch andere Repos?
+  * DSF https://github.com/datasharingframework/dsf
+  * Blaze https://github.com/samply/blaze
+  * MII-Termserv https://gitlab.com/mii-termserv
 
 # Organization Governance
 
@@ -175,6 +178,26 @@ OpaVote rather than by them, and they may delegate the administrative work to a
 member who is **not** standing. Once the result is final, the Admin list on the
 organization profile is updated accordingly (see Section 1).
 
+### The first Admins
+
+The election procedure above assumes there is already a set of Admins to
+organize it. The very first Admins are therefore not elected but
+**bootstrapped** from the team that sets up the new organization:
+
+- The founding team designates **three** of its members as the first Admins.
+- They serve a single **interim term of six months**, which exists only to get
+  the organization running and to prepare the first regular election.
+- Within that six months, the founding Admins **must hold the first regular
+  election** following the procedure in *Electing the Admins* above. In that
+  election they act as the "outgoing Admins".
+- During the interim term the founding Admins have the same powers, follow the
+  same rules (real name, 2FA — see Section 3), and are bound by the same limits
+  as elected Admins.
+- Once the first election is complete and the newly elected Admins are recorded
+  on the organization profile, the interim term ends and the normal two-year
+  cycle begins. Founding Admins may stand in the first election and be elected
+  in the ordinary way.
+
 ---
 
 ## 3. Rules for Admins
@@ -312,4 +335,3 @@ Every repository has a `README` that explains:
 These rules can be changed by a **majority of the Admins**. Changes are made via
 a pull request to this document so that the history of decisions is visible. The
 majority is expressed by at least two positive reviews of the pull request.
-
