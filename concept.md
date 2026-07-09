@@ -8,6 +8,12 @@
   * DSF https://github.com/datasharingframework/dsf
   * Blaze https://github.com/samply/blaze
   * MII-Termserv https://gitlab.com/mii-termserv
+* NUM: Markus Brechtel abstimmen, hat vielleciht schon etwas
+* TMF oder GMDS als juristische Person
+* Wahl der Admins wird hintergfragt. Eher Gremien in TMF bsp.
+* Weiterbildungsangebot, um Repo auf Qualitätlevel zu heben
+* Herstellerhaftung wird nicht über TMF usw. gehen
+* Regeln für Repos aufstellen !!! KRITIS, NIS2
 
 # Organization Governance
 
@@ -303,6 +309,57 @@ Every repository has a `README` that explains:
 - Members are added to the organization by Admins, normally on request and with
   a stated purpose.
 - All members must abide by the Code of Conduct.
+
+### Code of Conduct enforcement
+
+The organization's Code of Conduct is the Berlin Code of Conduct (see Section
+5.1). It sets out the expected behaviour but says little about how breaches are
+handled; this section fills that gap. It applies to **everyone** in the
+organization — members, Maintainers, and Admins alike.
+
+**Reporting.** Concerns are reported confidentially to the Admins, who are the
+contact point for Code of Conduct matters (see Section 3). Reports are handled
+as confidentially as possible, and a reporter's identity is not disclosed
+without their consent.
+
+**Who decides.** The Admins handle Code of Conduct concerns. Minor issues may
+be addressed informally by a single Admin — for example, a private request to
+stop a behaviour. Any **formal sanction** — a recorded warning, a temporary
+suspension, or removal from the organization — requires a **majority of the
+Admins**.
+
+**Fair process.** Before a formal sanction is imposed, the person concerned is
+told what the concern is and given a reasonable opportunity to respond, unless
+immediate action is needed to protect others. An Admin who is the subject of a
+report, or who has a conflict of interest in it, takes no part in deciding it.
+
+**Graduated responses.** The Admins choose a response proportionate to the
+behaviour, escalating as needed. The typical steps, modelled on widely used
+practice such as the Contributor Covenant enforcement guidelines, are:
+
+1. **Correction** — a private, informal request to change the behaviour.
+2. **Warning** — a formal, recorded warning that continued or repeated
+   behaviour will lead to stronger sanctions.
+3. **Temporary suspension** — time-limited removal of access to the
+   organization or parts of it.
+4. **Removal** — permanent removal from the organization.
+
+Serious violations may lead directly to suspension or removal without the
+earlier steps.
+
+**Urgent action.** In urgent cases — for example ongoing harassment or a
+security threat — any Admin may immediately suspend a person's access as a
+protective measure. The Admins then decide by majority, as above, whether to
+lift the measure or make it permanent.
+
+**Roles vs the organization.** Removing someone from the *organization* under
+this section is separate from removing them from a *role*: an Admin is removed
+as described in Section 2, and a Maintainer as described in Section 7. A person
+removed from the organization necessarily loses any role they held.
+
+**Appeal.** A person who has been formally sanctioned may ask the Admins to
+reconsider, providing any relevant new information; the Admins decide by
+majority.
 
 ---
 
