@@ -14,6 +14,12 @@
 * Weiterbildungsangebot, um Repo auf Qualitätlevel zu heben
 * Herstellerhaftung wird nicht über TMF usw. gehen
 * Regeln für Repos aufstellen !!! KRITIS, NIS2
+* Zweckbestimmung der Software in Hinsicht auf Betrieb definieren im Repo
+* Softwarearchitektur mit Komunikationsstrecken, Kommunikationsmatrix
+* NUM Repos per Forgejo gehostet
+* Gedanken zu Soverenität aufnehmen
+* Codeberg
+* 
 
 # Notes
 
@@ -283,6 +289,7 @@ belong to one of the following types (extend this list as needed):
 - **Software** – source code of a tool or service. Such repositories are
   additionally subject to the **Rules for Software Repositories** (Section 6),
   which cover branching, releases, documentation, and more.
+- **Research Software** – rules do not apply, does not run in a DIZ except **License and contribution terms.**
 - **KDS modules** – core data set (Kerndatensatz) modules and their
   specifications.
 - **Process models** – descriptions of organizational or technical processes.
