@@ -251,7 +251,7 @@ a repository — its code, documentation, branching details, releases, and which
 issues or pull requests are accepted — is the sole responsibility of that
 repository's Maintainers. Admins do not set rules for individual repositories;
 the only rules they establish are the organization-wide governance in this
-document (changed as described in Section 9). This includes the Rules for
+document (changed as described in Section 10). This includes the Rules for
 Software Repositories (Section 6): Admins enforce those rules **formally** —
 checking that a required file, artifact, or documented process exists — but
 never judge the technical content or quality of a repository.
@@ -339,7 +339,7 @@ of their own environment.
 
 These rules apply to repositories of the **Software** type (see Section 5.2).
 They are organization-wide rules, part of this governance document, and are
-changed only as described in Section 9. Consistent with Section 3, no Admin
+changed only as described in Section 10. Consistent with Section 3, no Admin
 can impose additional rules on an individual repository, and Admins enforce
 the rules below purely formally, without judging repository contents.
 
@@ -418,6 +418,16 @@ can ultimately lead to archiving (see *Enforcement* below).
     contributors work for institutions that may hold the rights to their work
     (§ 69b UrhG) — without the contribution barrier of a contributor license
     agreement.
+11. **Portable build logic.** Build, test, and release logic lives in scripts,
+    `Makefile`s, or containers inside the repository and is invoked by the CI
+    workflow, so that the workflow definition stays a thin wrapper and the
+    repository can be built and tested locally with the same commands CI uses.
+    See Section 9.5.
+12. **Repository as the authoritative record, and mirroring.** Documentation,
+    decisions, and compliance statements live as files in git rather than in
+    platform-only features, and the repository is automatically mirrored at
+    least weekly to a second platform under independent control. See
+    Section 9.5.
 
 ### 6.2 Recommended practices
 
@@ -587,7 +597,167 @@ majority.
 
 ---
 
-## 9. Changing These Rules
+## 9. Digital Sovereignty and Choice of Platform
+
+This organization is hosted on **GitHub**, a proprietary platform operated by a
+US company. For an organization that hosts publicly funded software for German
+healthcare infrastructure, that is a deliberate choice and not a neutral one:
+it deserves to be stated openly, justified, and kept under review. This section
+records the reasoning, the alternatives, and — most importantly — the rules
+that keep the choice **reversible**.
+
+### 9.1 The governing principle: exit cost, not presence cost
+
+Digital sovereignty is often argued as a question of *where* something is
+hosted. That framing is too narrow. As long as a platform serves the
+organization well, being there costs little; what actually determines
+sovereignty is the answer to a different question:
+
+> **How expensive would it be to leave?**
+
+A platform we could leave within weeks, at moderate cost, does not hold us
+captive — even if it is proprietary and foreign-operated. A platform we could
+not realistically leave at all owns our infrastructure, no matter how good its
+terms are today. Sovereignty is therefore treated here primarily as a matter of
+**keeping the exit cost low and known**, and only secondarily as a matter of
+which provider is used at any given moment.
+
+Two consequences follow, and they shape the rest of this section:
+
+1. Staying on GitHub is acceptable **as long as it works for us**, and no
+   migration is undertaken for its own sake.
+2. The organization actively **limits lock-in** and periodically **measures**
+   what a move would cost, so that the decision to leave stays a real option
+   rather than a theoretical one.
+
+### 9.2 Why GitHub today
+
+GitHub is used because it currently offers, at no cost to the organization,
+what a migration would have to replace:
+
+- **Reach.** The overwhelming majority of potential contributors, reviewers,
+  and operators already have an account. Contribution barriers matter for a
+  volunteer-driven, cross-institutional organization.
+- **CI at no cost.** Most repositories build, test, sign, and release via
+  **GitHub Actions** on GitHub-hosted runners. No runner infrastructure has to
+  be operated, paid for, patched, or monitored.
+- **Supply-chain features that Section 6 depends on.** Dependabot, security
+  advisories, the GitHub Advisory Database, branch protection, and — notably —
+  **keyless signing via OIDC** (Sigstore/cosign), which today has its most
+  mature integration with GitHub Actions.
+- **Operational burden of zero.** Availability, backups, spam defence, and
+  security patching of the platform itself are somebody else's problem, and
+  the organization has no budget line and no staff for them.
+
+### 9.3 The alternatives, honestly costed
+
+**Codeberg** (Forgejo, operated by a German non-profit association,
+*Codeberg e.V.*, hosted in Germany) is the strongest sovereignty argument: EU
+jurisdiction, non-profit governance, fully open-source software, no vendor
+control. Its limitation is CI. Codeberg's CI (Woodpecker) does **not** provide
+free general-purpose hosted runners comparable to GitHub's; projects are
+expected to **bring their own runners**. Every workflow in the organization
+would have to be rewritten, and the organization — or the institutions behind
+it — would have to operate and fund runner machines permanently.
+
+**Self-hosted GitLab or Forgejo** gives the greatest control and, unlike
+Codeberg, no dependence on a third party's terms at all. It is also the most
+expensive option: server hosting, backups, monitoring, updates, security
+patching, spam and abuse handling, identity management, plus CI runners — all
+permanently, all requiring an institution willing to commit staff, not just
+money. It is worth noting that this is not hypothetical in our environment:
+**NUM hosts its repositories on Forgejo**, and the **MII terminology service
+lives on GitLab** — so parts of the community already operate such
+infrastructure, and any future move should first ask whether an existing
+instance can be joined rather than a new one built.
+
+The recurring theme is that the *hosting* of git itself is the cheap part. The
+expensive parts are **CI** and **operations**, and both are permanent costs,
+whereas the migration itself is a one-off cost.
+
+### 9.4 What a migration would actually cost
+
+Making the exit cost explicit is what turns this section from a statement of
+values into a usable decision basis. The cost has three components:
+
+- **One-off — code and workflows.** Git history, branches, and tags move
+  trivially (git is distributed by design). Issues, pull requests, releases,
+  and their discussion history migrate with existing tooling but imperfectly.
+  The real work is **rewriting every CI workflow**: multiplied by the number of
+  software repositories, this is the dominant one-off cost.
+- **One-off — trust anchors.** Signing identities, release verification
+  instructions, and any documentation referencing GitHub URLs must be reissued
+  and updated; keyless Sigstore identities are bound to the GitHub workflow
+  identity and would change.
+- **Permanent — runners and operations.** CI runner capacity for every
+  repository, and (for the self-hosted option) the platform itself. This is the
+  cost that does not end, and it is the reason neither alternative is adopted
+  today.
+
+### 9.5 Rules that keep the exit affordable
+
+To make sure the exit cost stays bounded, the following apply. Items marked
+*mandatory* are part of the mandatory rules for software repositories (Section
+6.1) and are enforced formally, like the rest of that section.
+
+1. **Portable build logic (mandatory).** The actual build, test, and release
+   logic lives in scripts, `Makefile`s, or containers **in the repository**,
+   invoked by the CI workflow. The workflow file should be a thin wrapper. A
+   repository must be buildable and testable locally with the same commands CI
+   uses. This is the single most effective measure against CI lock-in, and it
+   improves the repository regardless of any migration.
+2. **The repository is the authoritative record (mandatory).** Everything that
+   must survive a platform change — documentation, architecture decisions,
+   governance, compliance statements, release notes — lives in git, as files,
+   not in platform-only features such as wikis, Projects, or Discussions.
+   Issues and pull-request discussions are the accepted exception; losing part
+   of that history is a tolerated migration cost.
+3. **Mirroring (mandatory for Software repositories).** Every software
+   repository is mirrored, at least weekly and automatically, to a second
+   platform under independent control. A mirror is cheap, provides an
+   off-platform backup, and means the day GitHub becomes unavailable the code
+   does not become unavailable with it.
+4. **No new deep dependencies without a documented alternative
+   (organizational rule).** When the Admins add a mandatory rule under Section
+   6, they must be able to name how it would be satisfied on Forgejo or GitLab.
+   Section 6 is deliberately written in terms of *outcomes* — an SBOM, a
+   signature, a protected branch, a CI pipeline — not in terms of GitHub
+   features, and it must stay that way.
+5. **Prefer open standards and portable tooling (recommended).** CycloneDX or
+   SPDX rather than a vendor format; Sigstore/cosign rather than a
+   platform-proprietary attestation; Renovate (which runs anywhere) rather than
+   Dependabot where the choice is free.
+
+### 9.6 Reviewing the decision
+
+The Admins **review the platform choice at least every two years**, aligned
+with the regular Admin election (Section 2), and record the outcome — including
+an unchanged outcome — in this document. The review answers three questions:
+does GitHub still work for us; what would a move cost today; and are the
+lock-in rules in Section 9.5 actually being followed.
+
+Independently of the cycle, the Admins reconsider the choice without delay if
+any of the following occurs:
+
+- GitHub's terms, pricing, or availability change in a way that materially
+  affects the organization (for example, if Actions minutes for public
+  repositories stop being free);
+- a legal or regulatory requirement makes hosting on a US-operated platform
+  untenable for the institutions involved;
+- a funder or the institutions behind the organization require a European or
+  self-hosted platform;
+- a viable alternative appears that removes the CI cost objection — for
+  example, an existing NUM or MII-operated Forgejo/GitLab instance offering
+  runner capacity to this organization.
+
+A change of platform is a change to this document and therefore requires a
+majority of the Admins (Section 10). Given its scope, the Admins should not
+decide it alone: such a proposal is announced to all members with a reasonable
+period for comment before it is merged.
+
+---
+
+## 10. Changing These Rules
 
 These rules can be changed by a **majority of the Admins**. Changes are made via
 a pull request to this document so that the history of decisions is visible. The
