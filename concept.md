@@ -19,7 +19,14 @@
 * NUM Repos per Forgejo gehostet
 * Gedanken zu Soverenität aufnehmen
 * Codeberg
-* 
+* CONTRIBUTING.md muss im Repo vorhanden sein
+* explizit größer denken als NUM, weil NUM nur Unikliniken, deckt nicht gesamte 
+  Medizininformatik ab
+* warum sollten Softwareprojekte in diese Org gehen?
+  * kann Anforderung von den Betreibern sein
+  * ist es ein Vorteil für Förderer zu wissen, dass die Open Source Software 
+    dann auch gewissen Qualitätsstandards maintained wird 
+   
 
 # Notes
 
