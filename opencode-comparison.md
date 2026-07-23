@@ -26,7 +26,7 @@ election: three Admins chosen by all members via STV with a RON option,
 two-year terms, a scaling quorum, and a documented bootstrap procedure.
 Members are not just users of a service — they are the electorate that
 constitutes the governing body, and rule changes happen via reviewable pull
-requests (concept.md Section 9). openCode has no equivalent to any of this.
+requests (concept.md Section 10). openCode has no equivalent to any of this.
 
 ---
 
